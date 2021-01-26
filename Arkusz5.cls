@@ -7,6 +7,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = True
+Option Base 1 'tablice sa numerowane od 1
 'Funkcja mieniaj¹ca kropki na przecinki
 Function zamien_kropi(arg As String) As Double
    arg = Replace(arg, ".", ",")
@@ -72,25 +73,48 @@ Private Sub CommandButton2_Click()
     Dim z As String
     Dim xz As String
     Dim R1 As String
+    Dim Wczytywanie_id_z_listy As Boolean
     Dim ilosc_wierszy_maly As Long
     Dim ilosc_kolumn_maly As Integer
     Dim maly_uklad As Variant
+    Dim lista_ID As Variant
+    Dim wiersze_listy_ID As Integer
     
     x = TextBox2
     y = TextBox3
     z = TextBox5
     xz = TextBox6
     R1 = TextBox8
-    IdH = TextBox10
-    IdO = TextBox11
-    IdH = CDbl(IdH)
-    IdO = CDbl(IdO)
-    x = zamien_kropi(x)
-    y = zamien_kropi(y)
-    z = zamien_kropi(z)
-    xz = zamien_kropi(xz)
-    R1 = zamien_kropi(R1)
     
+    Wczytywanie_id_z_listy = Range("I33")
+    
+    If Wczytywanie_id_z_listy = True Then
+        MsgBox ("Wczytujê z listy")
+        i = 0
+        Do While Worksheets("Systam-skalowanie duzy").Cells(56 + i, 9) > 0
+            i = i + 1
+        Loop
+        
+        If i = 0 Then
+            MsgBox (" Pusta lista")
+        Else
+            wiersze_listy_ID = i
+            lista_ID = Range(Cells(56, 9), Cells(55 + wiersze_listy_ID, 10))
+        End If
+    Else
+        wiersze_listy_ID = 0
+        IdH = TextBox10
+        IdO = TextBox11
+        IdH = CDbl(IdH)
+        IdO = CDbl(IdO)
+    End If
+    
+        x = zamien_kropi(x)
+        y = zamien_kropi(y)
+        z = zamien_kropi(z)
+        xz = zamien_kropi(xz)
+        R1 = zamien_kropi(R1)
+
     'Wczytaj uklad- Komórki w których zaczyna siê tabela
     Const a As Integer = 3 'sta³a, nie da siê przypisaæ wartoœci do sta³ej
     Const b As Integer = 13 'sta³a
@@ -99,7 +123,7 @@ Private Sub CommandButton2_Click()
     Wczytywaj_uklad a, b, ilosc_wierszy_maly, ilosc_kolumn_maly, maly_uklad, x, y, z, xz
     
     'ZnajdŸ wi¹zania
-    Znajdowanie_wiazan x, y, z, xz, R1, IdH, IdO, maly_uklad, ilosc_wierszy_maly
+    Znajdowanie_wiazan x, y, z, xz, R1, IdH, IdO, maly_uklad, ilosc_wierszy_maly, lista_ID, wiersze_listy_ID
     
     MsgBox "Koniec"
     
@@ -118,10 +142,14 @@ Private Sub CommandButton3_Click()
     Dim IdO As Variant
     Dim IdH As Variant
     Dim Idsub As Variant
+    Dim Wczytywanie_id_z_listy As Boolean
     Dim x As String
     Dim y As String
     Dim z As String
     Dim xz As String
+    Dim lista_ID As Variant
+    Dim wiersze_listy_ID As Integer
+    
     x = TextBox2
     y = TextBox3
     z = TextBox5
@@ -130,12 +158,29 @@ Private Sub CommandButton3_Click()
     R1 = TextBox8
     R2 = TextBox9
     
-    IdH = TextBox10
-    IdO = TextBox11
-    Idsub = TextBox12
-    IdH = CDbl(IdH)
-    IdO = CDbl(IdO)
-    Idsub = CDbl(Idsub)
+    Wczytywanie_id_z_listy = Range("I33")
+    
+    If Wczytywanie_id_z_listy = True Then
+        MsgBox ("Wczytujê z listy")
+        i = 0
+        Do While Worksheets("Systam-skalowanie duzy").Cells(56 + i, 9) > 0
+            i = i + 1
+        Loop
+        
+        If i = 0 Then
+            MsgBox (" Pusta lista")
+        Else
+            wiersze_listy_ID = i
+            lista_ID = Range(Cells(56, 9), Cells(55 + wiersze_listy_ID, 11))
+        End If
+    Else
+        IdH = TextBox10
+        IdO = TextBox11
+        Idsub = TextBox12
+        IdH = CDbl(IdH)
+        IdO = CDbl(IdO)
+        Idsub = CDbl(Idsub)
+    End If
     
     x = zamien_kropi(x)
     y = zamien_kropi(y)
@@ -152,7 +197,7 @@ Private Sub CommandButton3_Click()
     Wczytywaj_uklad a, b, ilosc_wierszy_maly, ilosc_kolumn_maly, maly_uklad, x, y, z, xz
     
     'ZnajdŸ wi¹zania wiazania katowe
-    katy_sub x, y, z, xz, R1, R2, IdH, IdO, Idsub, maly_uklad, ilosc_wierszy_maly
+    katy_sub x, y, z, xz, R1, R2, IdH, IdO, Idsub, maly_uklad, ilosc_wierszy_maly, lista_ID, wiersze_listy_ID
     
     MsgBox "Koniec"
 Exit Sub 'Koñczy procedurê
