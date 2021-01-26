@@ -86,7 +86,7 @@ Private Sub CommandButton2_Click()
     xz = TextBox6
     R1 = TextBox8
     
-    Wczytywanie_id_z_listy = Range("I33")
+    Wczytywanie_id_z_listy = Range("J31")
     
     If Wczytywanie_id_z_listy = True Then
         MsgBox ("Wczytujê z listy")
@@ -158,7 +158,7 @@ Private Sub CommandButton3_Click()
     R1 = TextBox8
     R2 = TextBox9
     
-    Wczytywanie_id_z_listy = Range("I33")
+    Wczytywanie_id_z_listy = Range("J31")
     
     If Wczytywanie_id_z_listy = True Then
         MsgBox ("Wczytujê z listy")
@@ -206,4 +206,8 @@ Exit Sub 'Koñczy procedurê
 'MsgBox "Z³e typy wprowadzanych danny, id atomu nie mo¿e równac sie 0" 'komunikat przy bledzie
 'Err.Clear 'czyœci b³êdy
     
+End Sub
+
+Private Sub Label7_Click()
+
 End Sub
