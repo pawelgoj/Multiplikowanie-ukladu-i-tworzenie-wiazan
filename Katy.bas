@@ -61,6 +61,7 @@ Dim yO As Double
 Dim zO As Double
 Dim przelacznik As Boolean
 Dim Nagluwek As Integer
+Dim lista_wynikow As Long
 
 If wiersze_listy_ID > 0 Then
     przelacznik = True
@@ -70,6 +71,7 @@ Else
 End If
 
 Nagluwek = 0
+lista_wynikow = 0
 
 For iteracje_szukanie_wiazan = 1 To wiersze_listy_ID
 
@@ -146,22 +148,24 @@ For iteracje_szukanie_wiazan = 1 To wiersze_listy_ID
             Next j
         End If
     Next i
-
+    
     If k = 0 Then
         Range(Cells(2, 25), Cells(100, 27)).ClearContents
         MsgBox ("Incorrect ID of atom 1 or 2 else Too low cut radius")
 
     Else
+        lista_wynikow = lista_wynikow + k
         ReDim wyniki(k, 3)
-        Range(Cells(3 + Nagluwek + k * (iteracje_szukanie_wiazan - 1), 25), Cells(100 + k * iteracje_szukanie_wiazan, 27)).ClearContents
+        Range(Cells(3 + Nagluwek + (lista_wynikow - k), 25), Cells(100 + lista_wynikow, 27)).ClearContents
         For i = 1 To k
             For j = 1 To 3
                 wyniki(i, j) = katy(j, i)
             Next j
         Next i
     End If
+    
     'Wypisuje wyniki
-    Wypisywanie k, Nagluwek, iteracje_szukanie_wiazan, wyniki, IdH, IdO, Idsub
+    Wypisywanie k, lista_wynikow, Nagluwek, iteracje_szukanie_wiazan, wyniki, IdH, IdO, Idsub
 
     
 Next iteracje_szukanie_wiazan

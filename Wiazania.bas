@@ -21,6 +21,7 @@ Dim yO As Double
 Dim zO As Double
 Dim przelacznik As Boolean
 Dim Nagluwek As Integer
+Dim lista_wynikow As Long
 
 'Sprawdza czy wczytana jest lista czy tylko jeden typ wiazania
 If wiersze_listy_ID > 0 Then
@@ -31,6 +32,7 @@ Else
 End If
 
 Nagluwek = 0
+lista_wynikow = 0
 
 'Powtarzanie procedury dla wczytanej listy
 For iteracje_szukanie_wiazan = 1 To wiersze_listy_ID
@@ -77,10 +79,11 @@ For iteracje_szukanie_wiazan = 1 To wiersze_listy_ID
     If k = 0 Then
         Range(Cells(2, 22), Cells(1000, 23)).ClearContents
         MsgBox ("Incorrect ID of atom 1 or 2 else Too low cut radius/Nie poprawne ID lub zbyt ma³y promieñ odciêcia")
-
     Else
+        lista_wynikow = lista_wynikow + k
         ReDim wyniki(k, 2)
-        Range(Cells(3 + Nagluwek + k * (iteracje_szukanie_wiazan - 1), 22), Cells(100 + Nagluwek + k * iteracje_szukanie_wiazan, 23)).ClearContents
+        
+        Range(Cells(3 + Nagluwek + (lista_wynikow - k), 22), Cells(100 + Nagluwek + lista_wynikow, 23)).ClearContents
         For i = 1 To k
             For j = 1 To 2
                 wyniki(i, j) = wiazania(j, i)
@@ -88,7 +91,7 @@ For iteracje_szukanie_wiazan = 1 To wiersze_listy_ID
         Next i
     End If
     'Wypisuje wyniki
-    Wypisywanie k, Nagluwek, iteracje_szukanie_wiazan, wyniki, IdH, IdO, Idsub
+    Wypisywanie k, lista_wynikow, Nagluwek, iteracje_szukanie_wiazan, wyniki, IdH, IdO, Idsub
 Next iteracje_szukanie_wiazan
 
 End Sub
