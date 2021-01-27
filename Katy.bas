@@ -150,13 +150,13 @@ For iteracje_szukanie_wiazan = 1 To wiersze_listy_ID
     Next i
     
     If k = 0 Then
-        Range(Cells(2, 25), Cells(100, 27)).ClearContents
+        Range(Cells(3, 26), Cells(100, 29)).ClearContents
         MsgBox ("Incorrect ID of atom 1 or 2 else Too low cut radius")
 
     Else
         lista_wynikow = lista_wynikow + k
         ReDim wyniki(k, 3)
-        Range(Cells(3 + Nagluwek + (lista_wynikow - k), 25), Cells(100 + lista_wynikow, 27)).ClearContents
+        Range(Cells(3 + Nagluwek + (lista_wynikow - k), 26), Cells(100 + lista_wynikow, 29)).ClearContents
         For i = 1 To k
             For j = 1 To 3
                 wyniki(i, j) = katy(j, i)
@@ -165,7 +165,7 @@ For iteracje_szukanie_wiazan = 1 To wiersze_listy_ID
     End If
     
     'Wypisuje wyniki
-    Wypisywanie k, lista_wynikow, Nagluwek, iteracje_szukanie_wiazan, wyniki, IdH, IdO, Idsub
+    Wypisywanie k, lista_wynikow, Nagluwek, iteracje_szukanie_wiazan, wyniki, IdH, IdO, Idsub, lista_ID, przelacznik
 
     
 Next iteracje_szukanie_wiazan

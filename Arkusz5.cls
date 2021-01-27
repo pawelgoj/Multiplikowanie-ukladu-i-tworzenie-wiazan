@@ -65,7 +65,7 @@ Err.Clear 'czyœci b³êdy
 End Sub
 'Funkcja twórz wi¹zania
 Private Sub CommandButton2_Click()
-    On Error GoTo Error_handler
+    'On Error GoTo Error_handler
     Dim IdO As Variant
     Dim IdH As Variant
     Dim x As String
@@ -99,10 +99,9 @@ Private Sub CommandButton2_Click()
             MsgBox (" Pusta lista")
         Else
             wiersze_listy_ID = i
-            lista_ID = Range(Cells(56, 9), Cells(55 + wiersze_listy_ID, 10))
+            lista_ID = Range(Cells(56, 9), Cells(55 + wiersze_listy_ID, 12))
         End If
     Else
-        wiersze_listy_ID = 0
         IdH = TextBox10
         IdO = TextBox11
         IdH = CDbl(IdH)
@@ -129,9 +128,9 @@ Private Sub CommandButton2_Click()
     
     Exit Sub 'Koñczy procedurê
 
-Error_handler:
-MsgBox "Z³e typy wprowadzanych danny, id atomu nie mo¿e równac sie 0" 'komunikat przy bledzie
-Err.Clear 'czyœci b³êdy
+'Error_handler:
+'MsgBox "Z³e typy wprowadzanych danny, id atomu nie mo¿e równac sie 0" 'komunikat przy bledzie
+'Err.Clear 'czyœci b³êdy
 
 End Sub
 'Funkcja twórz wiazania katowe
@@ -171,7 +170,7 @@ Private Sub CommandButton3_Click()
             MsgBox (" Pusta lista")
         Else
             wiersze_listy_ID = i
-            lista_ID = Range(Cells(56, 9), Cells(55 + wiersze_listy_ID, 11))
+            lista_ID = Range(Cells(56, 9), Cells(55 + wiersze_listy_ID, 12))
         End If
     Else
         IdH = TextBox10

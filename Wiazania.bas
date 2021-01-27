@@ -13,7 +13,7 @@ Dim m As Integer
 Dim iteracje_szukanie_wiazan As Integer
 Dim modul_wektor As Double
 Dim wiazania() As Double
-Dim wyniki() As Double
+Dim wyniki() As Variant
 Dim wiersze As Long
 Dim iteracja As Integer
 Dim xO As Double
@@ -77,21 +77,23 @@ For iteracje_szukanie_wiazan = 1 To wiersze_listy_ID
     Next i
     
     If k = 0 Then
-        Range(Cells(2, 22), Cells(1000, 23)).ClearContents
+        Range(Cells(3, 22), Cells(1000, 24)).ClearContents
         MsgBox ("Incorrect ID of atom 1 or 2 else Too low cut radius/Nie poprawne ID lub zbyt ma³y promieñ odciêcia")
     Else
         lista_wynikow = lista_wynikow + k
         ReDim wyniki(k, 2)
         
-        Range(Cells(3 + Nagluwek + (lista_wynikow - k), 22), Cells(100 + Nagluwek + lista_wynikow, 23)).ClearContents
+        Range(Cells(3 + Nagluwek + (lista_wynikow - k), 22), Cells(100 + Nagluwek + lista_wynikow, 24)).ClearContents
         For i = 1 To k
             For j = 1 To 2
                 wyniki(i, j) = wiazania(j, i)
             Next j
         Next i
     End If
+    
     'Wypisuje wyniki
-    Wypisywanie k, lista_wynikow, Nagluwek, iteracje_szukanie_wiazan, wyniki, IdH, IdO, Idsub
+    Wypisywanie k, lista_wynikow, Nagluwek, iteracje_szukanie_wiazan, wyniki, IdH, IdO, Idsub, lista_ID, przelacznik
+    
 Next iteracje_szukanie_wiazan
 
 End Sub
